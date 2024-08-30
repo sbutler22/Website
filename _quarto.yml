@@ -9,6 +9,8 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: 400_Data.qmd
+        text: 400_work
 
 format:
   html:
