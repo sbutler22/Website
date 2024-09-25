@@ -10,7 +10,7 @@ website:
         text: Home
       - about.qmd
       - href: 400_Data.qmd
-        text: 400_work
+        text: 400 Running Data
 
 format:
   html:
