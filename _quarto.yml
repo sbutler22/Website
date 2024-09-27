@@ -6,11 +6,14 @@ website:
   title: "Website"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: "Home"
+        href: index.qmd
+      - text: "Tidy Tuesday"
+        menu:
+          - text: "Chess 9/24/24"
+            href: chess_website.qmd
+      - text: "400 Running Data"
       - href: 400_Data.qmd
-        text: 400 Running Data
 
 format:
   html:
