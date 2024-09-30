@@ -13,7 +13,7 @@ website:
           - text: "Chess 9/24/24"
             href: chess_website.qmd
       - text: "400 Running Data"
-      - href: 400_Data.qmd
+        href: 400_Data.qmd
 
 format:
   html:
