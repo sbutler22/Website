@@ -2,6 +2,9 @@
 title: "400_Data"
 format: html
 editor: source
+execute: 
+  warning: false
+  message: false
 
 project:
   type: website
@@ -20,13 +23,15 @@ library(infer)
 library(praise)
 ```
 
-## the data
+### the data
 
-```{r}
+the data comes from the Pomona-Pitzer track team which is a Division 3 collegiate program. much of it is times collected through a laser timing system used on days when the team is doing short-sprinting work. An interest of this analysis is to see how the success of 400 meter athletes in the short-sprinting work compares to their abilities in the actual 400 meter races. This is of interest because the 400 is a long enough event that it requires both aerobic and anaerobic strengths, the balance of which can vary from athlete to athlete. the data is too small to make any legitimate conclusions, but will be cool to explore nonetheless!
+
+```{r, include=FALSE}
 four_hund_data <- read.csv("/Users/sambutler/Desktop/400 Data - Sheet1.csv")
 ```
 
-# question 1
+### question 
 
 how do both standing and flying 30 meter times correspond to 400 performance?
 
@@ -121,3 +126,4 @@ total_df %>%
   ylab("400 meter PRs") +
   coord_cartesian(ylim = c(45, 65)) 
 ```
+Sam and Olivia's fly 30 meter PRs move them closer to the fast end of their respective groups which tells us that max velocity might correspond more directly with their 400 meter ability. Fox however is still in a similar spot relative to the others, which makes sense because he is historically an 800/1500 meter runner so his strengths are truly more aerobic.
