@@ -10,11 +10,6 @@ project:
   type: website
   output-dir: docs
   
-website:
-  title: "400 data"
-  navbar:
-    left:
-      - href: 
 ---
 
 ```{r}
