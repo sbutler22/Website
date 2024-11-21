@@ -1,5 +1,5 @@
 ---
-title: "Tidy Tuesday Chess"
+title: "Chess 10/1/24"
 format: html
 editor: source
 execute: 
@@ -19,17 +19,20 @@ website:
 
 
 ```{r}
+#| echo: false
 library(tidyverse)
-library(wesanderson)
-library(praise)
 library(ggalluvial)
 library(ggrepel)
+library(wesanderson)
+library(praise)
+
 ```
 
+## the data
+this data comes from around 20,000 games collected from a selection of users on the site Lichess.org.
 
 
 ```{r}
-#| echo: false
 chess <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-10-01/chess.csv')
 
 ```
@@ -214,7 +217,4 @@ ggplot(aes(x = "", y = count, fill = conditions)) +
   
 ```
 
----
-title: "chess_website"
-editor: visual
----
+

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>400_Data – Website</title>
+<title>Countries 11/12/24 – Website</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./400_Data.html" aria-current="page"> 
+    <a class="nav-link" href="./400_Data.html"> 
 <span class="menu-text">400 Running Data</span></a>
   </li>  
 </ul>
@@ -158,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data">the data</a></li>
-  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question">question</a></li>
+  <li><a href="#map" id="toc-map" class="nav-link" data-scroll-target="#map">map</a></li>
   </ul>
 </nav>
     </div>
@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">400_Data</h1>
+<h1 class="title">Countries 11/12/24</h1>
 </div>
 
 
@@ -184,108 +184,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="the-data" class="level3">
-<h3 class="anchored" data-anchor-id="the-data">the data</h3>
-<p>the data comes from the Pomona-Pitzer track team which is a Division 3 collegiate program. much of it is times collected through a laser timing system used on days when the team is doing short-sprinting work. An interest of this analysis is to see how the success of 400 meter athletes in the short-sprinting work compares to their abilities in the actual 400 meter races. This is of interest because the 400 is a long enough event that it requires both aerobic and anaerobic strengths, the balance of which can vary from athlete to athlete. the data is too small to make any legitimate conclusions, but will be cool to explore nonetheless!</p>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">the data</h2>
+<p>the data this week contains countries and their corresponding country codes, as well as the subdivisions (provinces, states, etc.) found in each.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-11-12/countries.csv'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">case_when</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(common_name) <span class="sc">~</span> common_name,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> name</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>country_subdivisions <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-11-12/country_subdivisions.csv'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>former_countries <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-11-12/former_countries.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I want to count the number of subdivisions in each country and then plot them with a color gradient corresponding to the number of subdivisions</p>
 </section>
-<section id="question" class="level3">
-<h3 class="anchored" data-anchor-id="question">question</h3>
-<p>how do both standing and flying 30 meter times correspond to 400 performance?</p>
+<section id="map" class="level2">
+<h2 class="anchored" data-anchor-id="map">map</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first find average of five fastest times in each 30m category</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>thirties <span class="ot">&lt;-</span> four_hund_data[, <span class="fu">grep</span>(<span class="st">"30"</span>, <span class="fu">names</span>(four_hund_data))] </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># replace "NA" with 0 so that we can order the columns</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>thirties[<span class="fu">is.na</span>(thirties)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ordered_thirties <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">apply</span>(thirties, <span class="dv">2</span>, sort))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># finding the 5 lowest values</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>find_five_lowest_non_zero <span class="ot">&lt;-</span> <span class="cf">function</span>(column_data) {</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  non_zero_values <span class="ot">&lt;-</span> column_data[column_data <span class="sc">!=</span> <span class="dv">0</span>]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  sorted_values <span class="ot">&lt;-</span> <span class="fu">sort</span>(non_zero_values)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  five_lowest_values <span class="ot">&lt;-</span> <span class="fu">head</span>(sorted_values, <span class="dv">5</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(five_lowest_values)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>fastest_five <span class="ot">&lt;-</span> <span class="fu">apply</span>(ordered_thirties, <span class="dv">2</span>, find_five_lowest_non_zero) </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># in order to find the average of the fastest five, we need all vectors to actually be five values</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># finding the max_length</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>max_length <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">sapply</span>(fastest_five, length))</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># pad vectors with NAs to make them equal length</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>padded_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(fastest_five, <span class="cf">function</span>(x) {</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(x) <span class="ot">&lt;-</span> max_length</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># convert padded list to dataframe</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>fastest_five_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(padded_list)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># now we can calculate the averages</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>top_five_avgs <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(fastest_five_df, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>top_five_avgs_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(top_five_avgs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>now we can get our 400 performances</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>four_hundreds <span class="ot">&lt;-</span> four_hund_data[, <span class="fu">grep</span>(<span class="st">"400"</span>, <span class="fu">names</span>(four_hund_data))] </span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count number of subdivisions for each country</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get the fastest performances</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>min_values <span class="ot">&lt;-</span> <span class="fu">apply</span>(four_hundreds, <span class="dv">2</span>, min, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>num_subdiv <span class="ot">&lt;-</span> country_subdivisions <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(alpha_2)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>fastest_four_hundreds <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(min_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df_num_subdiv <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(num_subdiv)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add to original data frame</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> countries <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_num_subdiv, <span class="at">by =</span> <span class="st">"alpha_2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># want to make a dataframe that allows us to compare 30s and 400s</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>stand_thirties <span class="ot">&lt;-</span> top_five_avgs_df[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(top_five_avgs_df), <span class="at">by =</span> <span class="dv">2</span>), ]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fly_thirties <span class="ot">&lt;-</span> top_five_avgs_df[<span class="fu">seq</span>(<span class="dv">2</span>, <span class="fu">nrow</span>(top_five_avgs_df), <span class="at">by =</span> <span class="dv">2</span>), ]</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fastest_stand_thirties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(stand_thirties)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fastest_fly_thirties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(fly_thirties)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_country_subdiv <span class="ot">&lt;-</span> countries <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, n)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_country_subdiv) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"region"</span>, <span class="st">"subdivisions"</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>total_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(fastest_four_hundreds, fastest_stand_thirties, fastest_fly_thirties) <span class="sc">%&gt;%</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">athletes =</span> <span class="fu">c</span>(<span class="st">"Sam"</span>, <span class="st">"Jake"</span>, <span class="st">"Fox"</span>, <span class="st">"Jalen"</span>, <span class="st">"Rylan"</span>, <span class="st">"Seb"</span>, <span class="st">"Olivia"</span>, <span class="st">"Nicole"</span>, <span class="st">"Kensi"</span>, <span class="st">"Anna"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># match country names between the two data sets</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>df_country_subdiv <span class="ot">&lt;-</span> df_country_subdiv <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    region <span class="sc">==</span> <span class="st">"Russian Federation"</span> <span class="sc">~</span> <span class="st">"Russia"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    region <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">~</span> <span class="st">"USA"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    region <span class="sc">==</span> <span class="st">"Congo, The Democratic Republic of the"</span> <span class="sc">~</span> <span class="st">"Democratic Republic of the Congo"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    region <span class="sc">==</span> <span class="st">"Côte d'Ivoire"</span> <span class="sc">~</span> <span class="st">"Ivory Coast"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    region <span class="sc">==</span> <span class="st">"Türkiye"</span> <span class="sc">~</span> <span class="st">"Turkey"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    region <span class="sc">==</span> <span class="st">"Congo"</span> <span class="sc">~</span> <span class="st">"Republic of Congo"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    region <span class="sc">==</span> <span class="st">"Czechia"</span> <span class="sc">~</span> <span class="st">"Czech Republic"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> region</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> world <span class="sc">%&gt;%</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_country_subdiv, <span class="at">by =</span> <span class="st">"region"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>total_df <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> stand_thirties, <span class="at">y =</span> min_values, <span class="at">fill =</span> athletes)) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Sam"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Jake"</span> <span class="ot">=</span> <span class="st">"magenta"</span>, <span class="st">"Fox"</span> <span class="ot">=</span> <span class="st">"purple"</span>, <span class="st">"Seb"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"Jalen"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Rylan"</span> <span class="ot">=</span> <span class="st">"maroon"</span>, <span class="st">"Olivia"</span> <span class="ot">=</span> <span class="st">"lightgreen"</span>, <span class="st">"Nicole"</span> <span class="ot">=</span> <span class="st">"green"</span>, <span class="st">"Kensi"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>, <span class="st">"Anna"</span> <span class="ot">=</span> <span class="st">"orange"</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">"Jake"</span>, <span class="st">"Sam"</span>,  <span class="st">"Seb"</span>, <span class="st">"Fox"</span>, <span class="st">"Jalen"</span>, <span class="st">"Rylan"</span>, <span class="st">"Kensi"</span>, <span class="st">"Olivia"</span>, <span class="st">"Anna"</span>, <span class="st">"Nicole"</span>)) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"standing 30 meter PRs"</span>) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"400 meter PRs"</span>) <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">65</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>world <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_map</span>(<span class="at">map =</span> world, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(long, lat, <span class="at">map_id =</span> region, <span class="at">fill =</span> subdivisions))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="400_Data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Countries-11-12-24_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>athletes with lower bars relative to those clustered around them, (Sam, Fox, &amp; Olivia), are more “strength based” athletes. they have better 400 meter PRs with the same acceleration as those around them. so it is likely that their strength comes from somewhere else.</p>
-<p>now we might want to see how fly 30 Meter times compare to 400 meter PRs. since the fly times tell us more about max velocity than they do about acceleration, they might be more informative.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>total_df <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">x =</span> fly_thirties, <span class="at">y =</span> min_values, <span class="at">fill =</span> athletes), <span class="at">width =</span> <span class="fl">0.005</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Sam"</span> <span class="ot">=</span> <span class="st">"black"</span>, <span class="st">"Jake"</span> <span class="ot">=</span> <span class="st">"magenta"</span>, <span class="st">"Fox"</span> <span class="ot">=</span> <span class="st">"purple"</span>, <span class="st">"Seb"</span> <span class="ot">=</span> <span class="st">"darkblue"</span>, <span class="st">"Jalen"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Rylan"</span> <span class="ot">=</span> <span class="st">"maroon"</span>, <span class="st">"Olivia"</span> <span class="ot">=</span> <span class="st">"lightgreen"</span>, <span class="st">"Nicole"</span> <span class="ot">=</span> <span class="st">"green"</span>, <span class="st">"Kensi"</span> <span class="ot">=</span> <span class="st">"darkgreen"</span>, <span class="st">"Anna"</span> <span class="ot">=</span> <span class="st">"orange"</span>),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">"Jake"</span>, <span class="st">"Sam"</span>, <span class="st">"Seb"</span>, <span class="st">"Jalen"</span>, <span class="st">"Fox"</span>, <span class="st">"Rylan"</span>, <span class="st">"Olivia"</span>, <span class="st">"Kensi"</span>, <span class="st">"Nicole"</span>, <span class="st">"Anna"</span>)) <span class="sc">+</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"fly 30 meter PRs"</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"400 meter PRs"</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">65</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="400_Data_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Sam and Olivia’s fly 30 meter PRs move them closer to the fast end of their respective groups which tells us that max velocity might correspond more directly with their 400 meter ability. Fox however is still in a similar spot relative to the others, which makes sense because he is historically an 800/1500 meter runner so his strengths are truly more aerobic.</p>
 
 
 </section>

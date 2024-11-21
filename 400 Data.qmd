@@ -1,5 +1,5 @@
 ---
-title: "400_Data"
+title: "400 Data"
 format: html
 editor: source
 execute: 
@@ -13,6 +13,7 @@ project:
 ---
 
 ```{r}
+#| echo: false
 library(tidyverse)
 library(infer)
 library(praise)
@@ -26,7 +27,7 @@ the data comes from the Pomona-Pitzer track team which is a Division 3 collegiat
 four_hund_data <- read.csv("/Users/sambutler/Desktop/400 Data - Sheet1.csv")
 ```
 
-### question 
+### standing 30's vs. fly 30's
 
 how do both standing and flying 30 meter times correspond to 400 performance?
 
