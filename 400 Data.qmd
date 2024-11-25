@@ -24,7 +24,7 @@ library(praise)
 the data comes from the Pomona-Pitzer track team which is a Division 3 collegiate program. much of it is times collected through a laser timing system used on days when the team is doing short-sprinting work. An interest of this analysis is to see how the success of 400 meter athletes in the short-sprinting work compares to their abilities in the actual 400 meter races. This is of interest because the 400 is a long enough event that it requires both aerobic and anaerobic strengths, the balance of which can vary from athlete to athlete. the data is too small to make any legitimate conclusions, but will be cool to explore nonetheless!
 
 ```{r, include=FALSE}
-four_hund_data <- read.csv("/Users/sambutler/Desktop/400 Data - Sheet1.csv")
+four_hund_data <- read.csv("/Users/sambutler/Desktop/Website/400 Data - Sheet1.csv")
 ```
 
 ### standing 30's vs. fly 30's

@@ -10,11 +10,6 @@ project:
   type: website
   output-dir: docs
   
-website:
-  title: "Tidy Tuesday"
-  navbar:
-    left:
-      - href: 
 ---
 
 

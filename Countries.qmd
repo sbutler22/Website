@@ -4,6 +4,10 @@ editor: source
 execute: 
   warning: false
   message: false
+  
+project:
+  type: website
+  output-dir: docs
 ---
 
 ```{r}
