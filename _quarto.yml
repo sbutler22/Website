@@ -13,9 +13,11 @@ website:
       - text: "Tidy Tuesday"
         menu:
           - text: "Chess 9/24/24"
-            href: chess_website.qmd
+            href: Chess.qmd
+          - text: "Countries 11/12/24"
+            href: Countries.qmd
       - text: "400 Running Data"
-        href: 400_Data.qmd
+        href: 400 Data.qmd
 
 format:
   html:
