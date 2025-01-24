@@ -31,7 +31,7 @@ country_subdivisions <- readr::read_csv('https://raw.githubusercontent.com/rford
 former_countries <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-11-12/former_countries.csv')
 ```
 
-I want to count the number of subdivisions in each country and then plot them with a color gradient corresponding to the number of subdivisions
+I want to count the number of subdivisions in each country and then plot them with a color gradient corresponding to that number
 
 ## map
 
