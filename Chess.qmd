@@ -24,16 +24,16 @@ library(praise)
 ```
 
 ## the data
-this data comes from around 20,000 games collected from a selection of users on the site Lichess.org.
+This data comes from around 20,000 games collected from a selection of users on the site Lichess.org.
 
 
 ```{r}
 chess <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-10-01/chess.csv')
 
 ```
-I want to see how often black and white win, and whether rating has anything to do with it
+I want to see how often black and white win, and whether rating has anything to do with it.
 
-### bar plot
+## bar plot
 
 ```{r}
 # isolate wins based on color and rating
@@ -101,7 +101,7 @@ counts_summary_long %>%
 
 ```
 
-### alluvial plot
+## alluvial plot
 ```{r}
 # for alluvial we need three strata: winner/loser, color, and rating
 alluvial_chess <- chess_new %>%
@@ -155,7 +155,7 @@ ggplot(aes(axis1 = color, axis2 = rating, axis3 = outcome)) +
   ggtitle("Alluvial Plot of Chess Outcomes") +
   theme_minimal()
 ```
-the flows between the second and third strata are sort of a formality because each time black wins and has a higher rating, it is reflected by white losing with a lower rating. 
+This plot is not very informative since each game contains both values of each variable. For example, if there is a game where black has a higher rating and loses, then necessarily, in the same game, white had a lower rating and won, so the whole plot is symmetric. Nice to look at though!
 
 ```{r, include=FALSE}
 
