@@ -9,6 +9,7 @@ execute:
 project:
   type: website
   output-dir: docs
+  
 ---
 
 ## the data
