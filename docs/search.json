@@ -124,5 +124,54 @@
     "title": "Chess 10/1/24",
     "section": "alluvial plot",
     "text": "alluvial plot\n\n# for alluvial we need three strata: winner/loser, color, and rating\nalluvial_chess &lt;- chess_new %&gt;%\n  mutate(loser = case_when(\n    winner == \"white\" ~ \"black\",\n    winner == \"black\" ~ \"white\"\n  )) %&gt;%\n  mutate(winner_rating = case_when(\n    winner == \"white\" & white_rating &gt; black_rating ~ \"higher\",\n    winner == \"white\" & white_rating &lt; black_rating ~ \"lower\",\n    winner == \"black\" & white_rating &gt; black_rating ~ \"lower\",\n    winner == \"black\" & white_rating &lt; black_rating ~ \"higher\"\n  )) %&gt;%\n  mutate(loser_rating = case_when(\n    loser == \"white\" & white_rating &gt; black_rating ~ \"higher\",\n    loser == \"white\" & white_rating &lt; black_rating ~ \"lower\",\n    loser == \"black\" & white_rating &gt; black_rating ~ \"lower\",\n    loser == \"black\" & white_rating &lt; black_rating ~ \"higher\"\n  )) %&gt;%\n  select(winner, loser, winner_rating, loser_rating) %&gt;%\n  drop_na()\n\nrating &lt;- c(alluvial_chess$winner_rating, alluvial_chess$loser_rating)\ncolor &lt;- c(alluvial_chess$winner, alluvial_chess$loser)\n\n\nnew_alluvial_chess &lt;- alluvial_chess %&gt;%\n  data.frame(rating = rating, color = color) \n\nprint(nrow(new_alluvial_chess))\n\n[1] 37836\n\n# 37,836\n# the way the data frame is constructed, the first half are wins and the rest losses\nwins &lt;- rep(\"win\", 37836/2)\nlosses&lt;- rep(\"loss\", 37836/2)\noutcome &lt;- c(wins, losses)\n\nnew_alluvial_chess &lt;- new_alluvial_chess %&gt;%\n  mutate(outcome = outcome)\n\n\n# now to plot\nnew_alluvial_chess %&gt;%\nggplot(aes(axis1 = color, axis2 = rating, axis3 = outcome)) +\n  geom_alluvium(aes(fill = color)) +\n  geom_stratum() +\n  geom_text(stat = \"stratum\", aes(label = after_stat(stratum))) +\n  scale_x_discrete(limits = c(\"Color\", \"Rating\", \"Outcome\"), expand = c(0.15, 0.05)) +\n  ggtitle(\"Alluvial Plot of Chess Outcomes\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\nThis plot is not very informative since each game contains both values of each variable. For example, if there is a game where black has a higher rating and loses, then necessarily, in the same game, white had a lower rating and won, so the whole plot is symmetric. Nice to look at though!"
+  },
+  {
+    "objectID": "Mt_Vesuvius.html",
+    "href": "Mt_Vesuvius.html",
+    "title": "Mt. Vesuvius",
+    "section": "",
+    "text": "This dataset contains information about seismic events detected at Mount Vesuvius in Italy. It comes from the Italian Istituto Nazionale di Geofisica e Vulcanologia (INGV)’s Data Portal and can be explored along with other seismic areas on the GOSSIP website. The raw data was saved as individual CSV files from the GOSSIP website and some values were translated from Italian to English\n\nvesuvius &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-13/vesuvius.csv')"
+  },
+  {
+    "objectID": "Mt_Vesuvius.html#the-data",
+    "href": "Mt_Vesuvius.html#the-data",
+    "title": "Mt. Vesuvius",
+    "section": "",
+    "text": "This dataset contains information about seismic events detected at Mount Vesuvius in Italy. It comes from the Italian Istituto Nazionale di Geofisica e Vulcanologia (INGV)’s Data Portal and can be explored along with other seismic areas on the GOSSIP website. The raw data was saved as individual CSV files from the GOSSIP website and some values were translated from Italian to English\n\nvesuvius &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-13/vesuvius.csv')"
+  },
+  {
+    "objectID": "Mt_Vesuvius.html#earthquake-maps",
+    "href": "Mt_Vesuvius.html#earthquake-maps",
+    "title": "Mt. Vesuvius",
+    "section": "earthquake maps",
+    "text": "earthquake maps\n\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(ggspatial)\nlibrary(patchwork)\nlibrary(praise)\n\n\n# drop NA lat/long since we're plotting on a map\nvesuvius &lt;- vesuvius |&gt;\n  drop_na(latitude, longitude)\n\n\n# convert data to be compatible with sf\nvesuvius_sf &lt;- st_as_sf(vesuvius, coords = c(\"longitude\", \"latitude\"), crs = 4326)\n\n\n# map for energy release\nmagnitude &lt;- vesuvius_sf |&gt;\n  ggplot() +\n  geom_sf(aes(color = duration_magnitude_md), size = 1) +\n  scale_color_gradient(low = \"#3B4CC0\", high = \"#FADA48\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(vjust = 0.5, hjust=1, size = 5),\n        axis.title.x = element_text(vjust = -3),\n        axis.text.y = element_text(size = 5)) +  \n  labs(title = \"Energy Release\",\n       x = \"Longitude\", y = \"Latitude\")\n\n\n# map for year\nyear &lt;- vesuvius_sf |&gt;\n  ggplot() +\n  geom_sf(aes(color = year), size = 1) +\n  scale_color_gradient(low = \"#3B4CC0\", high = \"#FADA48\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(vjust = 0.5, hjust=1, size = 5),\n        axis.title.x = element_text(vjust = -3),\n        axis.text.y = element_text(size = 5)) +  \n  labs(title = \"Year\",\n       x = \"Longitude\", y = \"Latitude\")\n\n\n# map for depth of seismic event\ndepth &lt;- vesuvius_sf |&gt;\n  ggplot() +\n  geom_sf(aes(color = depth_km), size = 1) +\n  scale_color_gradient(low = \"#3B4CC0\", high = \"#FADA48\") +\n  theme_minimal() +\n  theme(axis.text.x = element_text(vjust = 0.5, hjust=1, size = 5),\n        axis.title.x = element_text(vjust = -3),\n        axis.text.y = element_text(size = 5)) +\n  labs(title = \"Depth\",\n       x = \"Longitude\", y = \"Latitude\")\n\n\n# put them all together\nmagnitude + year + depth + \n  plot_layout(ncol = 2) + plot_annotation(\"Earthquakes Around Mt. Vesuvius\", caption = \"Energy release measured by 'duration magnitude' (Md)\")"
+  },
+  {
+    "objectID": "Mt_Vesuvius.html#depth-vs.-duration-magnitude-md-by-year",
+    "href": "Mt_Vesuvius.html#depth-vs.-duration-magnitude-md-by-year",
+    "title": "Mt. Vesuvius",
+    "section": "Depth vs. Duration Magnitude (Md) by Year",
+    "text": "Depth vs. Duration Magnitude (Md) by Year\n\nvesuvius |&gt;\n  ggplot(aes(x = duration_magnitude_md, y = depth_km)) +\n  geom_point(aes(color = year)) +\n  facet_wrap(~year)\n\n\n\n\n\n\n\n\n\npraise()\n\n[1] \"You are kryptonian!\""
+  },
+  {
+    "objectID": "Eclipse.html",
+    "href": "Eclipse.html",
+    "title": "Eclipse 4/9/24",
+    "section": "",
+    "text": "library(tidyverse)\nlibrary(patchwork)\nlibrary(praise)"
+  },
+  {
+    "objectID": "Eclipse.html#the-data",
+    "href": "Eclipse.html#the-data",
+    "title": "Eclipse 4/9/24",
+    "section": "the data",
+    "text": "the data\nThis data has information about the paths of the solar eclipses on October 14, 2023 and April 8, 2024 in the United States. The data comes from NASA’s Scientific Visualization Studio.\n\neclipse_annular_2023 &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-04-09/eclipse_annular_2023.csv')\neclipse_total_2024 &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-04-09/eclipse_total_2024.csv')\neclipse_partial_2023 &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-04-09/eclipse_partial_2023.csv')\neclipse_partial_2024 &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-04-09/eclipse_partial_2024.csv')"
+  },
+  {
+    "objectID": "Eclipse.html#maps",
+    "href": "Eclipse.html#maps",
+    "title": "Eclipse 4/9/24",
+    "section": "maps",
+    "text": "maps\n\n# tidy 2024 data\ntot_24 &lt;- eclipse_total_2024 %&gt;% \n  mutate(time = eclipse_6 - eclipse_1, eclipse = \"total\") %&gt;% \n  select(state, name, lat, lon, time, eclipse)\n\npart_24 &lt;- eclipse_partial_2024 %&gt;% \n  mutate(time = eclipse_5 - eclipse_1, eclipse = \"partial\") %&gt;% \n  select(state, name, lat, lon, time, eclipse)\n\neclipse_24 &lt;- rbind(tot_24, part_24) %&gt;% \n  mutate(time = as.numeric(time))\n\n\n# plot 2024 data\nlibrary(ggnewscale)\nstates &lt;- map_data(\"state\")\n\ntwenty_four &lt;- ggplot(states) +\n  geom_polygon(fill = \"white\", color = \"black\",\n               aes(long,lat, group = group)) +\n  geom_point(data = filter(eclipse_24, lat &lt; 51 & lat &gt; 24 & lon &lt; 0 & eclipse == \"total\"), \n             aes(x = lon, y= lat, color = time), size = 0.001) +\n  scale_colour_gradientn(colors = c(\"blue\", \"turquoise\")) +\n  labs(color = \"time of overlap (sec)\\n total eclipse\") +\n  new_scale_color() +\n  geom_point(data = filter(eclipse_24, lat &lt; 51 & lat &gt; 24 & lon &lt; 0 & eclipse == \"partial\"), \n             aes(x = lon, y= lat, color = time), size = 0.001) +\n  scale_colour_gradientn(colors = c(\"red\", \"pink\")) +\n  ggtitle(\"2024 Solar Eclipse\") +\n  labs(x = \"\", y = \"\", color = \"time of overlap (sec)\\n partial eclipse\")\n\n\n# tidy 2023 data\ntot_23 &lt;- eclipse_annular_2023 %&gt;% \n  mutate(time = eclipse_6 - eclipse_1, eclipse = \"total\") %&gt;% \n  select(state, name, lat, lon, time, eclipse)\n\npart_23 &lt;- eclipse_partial_2023 %&gt;% \n  mutate(time = eclipse_5 - eclipse_1, eclipse = \"partial\") %&gt;% \n  select(state, name, lat, lon, time, eclipse)\n\neclipse_23 &lt;- rbind(tot_23, part_23) %&gt;% \n  mutate(time = as.numeric(time))\n\n\n# plot 2023 data\nstates &lt;- map_data(\"state\")\n\ntwenty_three &lt;- ggplot(states) +\n  geom_polygon(fill = \"white\", color = \"black\",\n               aes(long,lat, group = group)) +\n  geom_point(data = filter(eclipse_23, lat &lt; 51 & lat &gt; 24 & lon &lt; 0 & eclipse == \"total\"), \n             aes(x = lon, y= lat, color = time), size = 0.25) +\n  scale_colour_gradientn(colors = c(\"blue\", \"turquoise\")) +\n  labs(color = \"time of overlap (sec)\\n total eclipse\") +\n  new_scale_color() +\n  geom_point(data = filter(eclipse_23, lat &lt; 51 & lat &gt; 24 & lon &lt; 0 & eclipse == \"partial\"), \n             aes(x = lon, y= lat, color = time), size = 0.001) +\n  scale_colour_gradientn(colors = c(\"red\", \"pink\")) +\n  ggtitle(\"2023 Solar Eclipse\") +\n  labs(x = \"\", y = \"\", color = \"time of overlap (sec)\\n partial eclipse\")\n\n\ntwenty_three + twenty_four + plot_layout(ncol = 2)"
   }
 ]
