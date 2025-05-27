@@ -133,12 +133,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tidy-tuesday">    
         <li>
+    <a class="dropdown-item" href="./Eclipse.qmd">
+ <span class="dropdown-text">Eclipse 4/9/24</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="./Chess.html">
  <span class="dropdown-text">Chess 9/24/24</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Countries.html">
  <span class="dropdown-text">Countries 11/12/24</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Mt_Vesuvius.qmd">
+ <span class="dropdown-text">Mt. Vesuvius 5/13/25</span></a>
   </li>  
     </ul>
   </li>
@@ -191,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">the data</h2>
-<p>the data this week contains countries and their corresponding country codes, as well as the subdivisions (provinces, states, etc.) found in each.</p>
+<p>The data this week contains countries and their corresponding country codes, as well as the subdivisions (provinces, states, etc.) found in each.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>countries <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-11-12/countries.csv'</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">case_when</span>(</span>
@@ -201,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>country_subdivisions <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-11-12/country_subdivisions.csv'</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>former_countries <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-11-12/former_countries.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>I want to count the number of subdivisions in each country and then plot them with a color gradient corresponding to that number</p>
+<p>I want to count the number of subdivisions in each country and then plot them with a color gradient corresponding to that number.</p>
 </section>
 <section id="map" class="level2">
 <h2 class="anchored" data-anchor-id="map">map</h2>
