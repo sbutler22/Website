@@ -12,10 +12,14 @@ website:
         href: index.qmd
       - text: "Tidy Tuesday"
         menu:
+          - text: "Eclipse 4/9/24"
+            href: Eclipse.qmd
           - text: "Chess 9/24/24"
             href: Chess.qmd
           - text: "Countries 11/12/24"
             href: Countries.qmd
+          - text: "Mt. Vesuvius 5/13/25"
+            href: Mt_Vesuvius.qmd
       - text: "400 Running Data"
         href: 400 Data.qmd
 
