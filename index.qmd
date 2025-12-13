@@ -1,7 +1,0 @@
----
-title: "Sam Butler Data Projects"
----
-
-Hi!
-
-I'm Sam Butler. I am a Math Major at Pomona college, focusing in statistics and data science. This website is home to the projects I have worked on, particularly while spending a summer leading outdoor trips for teenagers, and studying abroad in Montpellier, France, both chapters where I have been away from math and stats classes, but have still been working in R.
