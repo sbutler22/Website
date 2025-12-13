@@ -4,8 +4,8 @@ project:
 
 website:
   title: "Website"
-  image: "Users/sambutler/Desktop/Website/website_headshot"
-  favicon: "Users/sambutler/Desktop/Website/website_headshot"
+  image: "website_headshot.jpeg"
+  favicon: "website_headshot.jpeg"
   navbar:
     left:
       - text: "Home"
