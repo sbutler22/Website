@@ -1,0 +1,29 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+    body-classes: home
+---
+
+<div class="hex-hub" aria-label="Homepage navigation hub">
+  <a class="hex hex-center" href="index.html" aria-label="Home">
+    <img src="Images/hex-face.png" alt="Home (Sam)" />
+  </a>
+
+  <a class="hex hex-top" href="data_viz.html" aria-label="Data Visualizations">
+    <img src="Images/hex-data_viz.png" alt="Data Visualizations" />
+  </a>
+
+  <a class="hex hex-left" href="research_for_website.html" aria-label="Research">
+    <img src="Images/hex-research.png" alt="Research" />
+  </a>
+
+  <a class="hex hex-right" href="about.html" aria-label="About">
+    <img src="Images/hex-about.png" alt="About" />
+  </a>
+</div>
+
+
+
+

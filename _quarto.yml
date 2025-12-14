@@ -1,0 +1,16 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Website"
+  image: "Images/liberty_bell.png"
+  favicon: "Images/liberty_bell.png"
+  navbar: false
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    include-in-header: _header.html

@@ -1,0 +1,12 @@
+---
+title: "About"
+format: html
+---
+
+[← Back to home](index.html){.back-home}
+
+Hi!
+
+My name is Sam and I'm from Philadelphia. I am currently a senior at Pomona College studying math on the statistics track. I love working with data and especially enjoy making visualizations, and this site provides a neat little place to bring them together.
+
+Outside of statistics, I love to spend time outdoors, rock climb, hike, and bike. I am also the captain of my collegiate track and field team, and when I'm not in Estella (our math building) I am usually down at the track. Go hens!

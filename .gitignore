@@ -1,0 +1,13 @@
+# RStudio / R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto
+/.quarto/
+
+# macOS
+.DS_Store
+
+/.quarto/

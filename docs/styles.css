@@ -1,0 +1,107 @@
+/* css styles */
+
+.site-header{
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+}
+
+.site-brand{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #212529;
+}
+
+.site-brand img{
+  width: 32px;
+  height: auto;
+}
+
+.site-name{
+  font-weight: 400;
+  font-size: 0.99rem;
+}
+
+/* avoid content hiding under the header */
+body{
+  padding-top: 3rem;
+}
+
+
+
+.hex-hub{
+  position: relative;
+  width: min(690px, 92vw);
+  height: min(490px, 70vh);
+  margin: 2rem auto 1rem auto;
+}
+
+.hex{
+  position: absolute;
+  display: inline-block;
+  text-decoration: none;
+  transform: translate(-50%, -50%);
+}
+
+.hex img{
+  width: 190px;
+  height: auto;
+  display: block;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.hex:hover img{
+  transform: scale(1.03);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.18));
+}
+
+.hex-center:hover img{
+  transform: none;
+  filter: none;
+}
+
+/* Positions (adjust these) */
+.hex-center{ left: 50%; top: 52%; }
+.hex-top{    left: 36%; top: 18%; }
+.hex-left{   left: 22%; top: 52%; }
+.hex-right{  left: 78%; top: 52%; }
+
+/* Mobile: stack */
+@media (max-width: 640px){
+  .hex-hub{ height: auto; padding-bottom: 1rem; }
+  .hex{ position: static; transform: none; display: block; text-align: center; margin: 1rem 0; }
+  .hex img{ width: 220px; margin: 0 auto; }
+}
+
+
+.back-home{
+  display: inline-block;
+  margin: 1rem 0 1.5rem 0;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: #555;
+}
+
+.back-home:hover{
+  text-decoration: underline;
+  color: #000;
+}
+
+body{
+  background-color: #798E87; /* replace with your color */
+}
+
+/* Inline code only (not fenced code blocks) */
+:not(pre) > code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+
+
+
