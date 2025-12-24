@@ -22,7 +22,12 @@ format:
   <a class="hex hex-right" href="about.html" aria-label="About">
     <img src="Images/hex-about.png" alt="About" />
   </a>
+
+  <a class="hex hex-bottom" href="154_class_proj.html" aria-label="Class Project">
+    <img src="Images/hex-class_project.png" alt="Class Project" />
+  </a>
 </div>
+
 
 
 

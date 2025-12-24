@@ -68,6 +68,8 @@ body{
 .hex-top{    left: 36%; top: 18%; }
 .hex-left{   left: 22%; top: 52%; }
 .hex-right{  left: 78%; top: 52%; }
+.hex-bottom{ left: 64%; top: 86%; }   /* new */
+
 
 /* Mobile: stack */
 @media (max-width: 640px){

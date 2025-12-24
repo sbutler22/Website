@@ -1,0 +1,14 @@
+---
+title: "Class Projects"
+---
+
+[← Back to home](index.html){.back-home}
+
+This project was for a class in computational statistics at Pomona. I worked on it with [Federica Domecq Lacroze](https://fedegudom47.github.io/). The project dives into different aspects of the higher education world in the United States, and was a blast to make!
+
+Access it here:
+
+[Universities Shiny App](https://swmbutler.shinyapps.io/university_analytics_shiny/)
+
+
+
