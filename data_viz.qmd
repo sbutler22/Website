@@ -20,7 +20,7 @@ library(praise)
 
 # Eclipses
 
-This data has information about the paths of the solar eclipses on October 14, 2023 and April 8, 2024 in the United States. The data comes from NASA's Scientific Visualization Studio.
+This data has information about the paths of the solar eclipses on October 14, 2023 and April 8, 2024 in the United States. The eclipse datasets were accessed via the TidyTuesday project (R for Data Science community), Week of April 9, 2024. The underlying data originate from NASA’s Scientific Visualization Studio.
 
 ```{r}
 eclipse_annular_2023 <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-04-09/eclipse_annular_2023.csv')
@@ -100,7 +100,7 @@ twenty_three + twenty_four + plot_layout(ncol = 2)
 
 # Mt. Vesuvius
 
-This dataset contains information about seismic events detected at Mount Vesuvius in Italy. It comes from the Italian Istituto Nazionale di Geofisica e Vulcanologia (INGV)'s Data Portal and can be explored along with other seismic areas on the GOSSIP website. The raw data was saved as individual CSV files from the GOSSIP website and some values were translated from Italian to English.
+This dataset contains information about seismic events detected at Mount Vesuvius in Italy. The data was accessed via TidyTuesday, Week of May 13, 2025, based on data from the Italian Istituto Nazionale di Geofisica e Vulcanologia (INGV). The raw data was saved as individual CSV files from the GOSSIP website and some values were translated from Italian to English.
 
 ```{r}
 vesuvius <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-05-13/vesuvius.csv')
@@ -163,9 +163,9 @@ magnitude + year + depth +
   plot_layout(ncol = 2) + plot_annotation("Earthquakes Around Mt. Vesuvius", caption = "Energy release measured by 'duration magnitude' (Md)")
 ```
 
-# HELP
+# H.E.L.P. (Health Evaluation and Linkage to Primary Care)
 
-The HELP dataset comes from a longitudinal study of adults experiencing housing instability and substance use disorders, designed to evaluate factors influencing linkage to medical and social services after enrollment. It includes detailed measures of incarceration history, substance use, mental health (including CES-D depression scores), and time to successful linkage to care.
+The HELP dataset comes from a longitudinal study of adults experiencing housing instability and substance use disorders in Boston in the early 2000's, designed to evaluate factors influencing linkage to medical and social services after enrollment. It includes detailed measures of incarceration history, substance use, mental health (including CES-D depression scores), and time to successful linkage to care. The dataset can be accessed [here.](https://melindahiggins2000.github.io/N736/helpdata.html)
 
 ```{r}
 library(wesanderson)

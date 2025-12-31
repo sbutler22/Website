@@ -100,10 +100,4 @@ body{
 :not(pre) > code {
   background-color: transparent !important;
   padding: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-}
-
-
-
-
+  border: 0 
