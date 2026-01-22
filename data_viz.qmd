@@ -219,3 +219,54 @@ tagList(tags$h3(style = "color:#000000; font-family:Ipsum Larem; font-weight:400
 
 When we stratify the cohort by incarceration exposure, depressive symptom burden, and marijuana-use history, the average time to linkage differs across subgroups—suggesting these risk/complexity dimensions may be associated with slower (or faster) linkage.
 
+# Rotaries and Roundabouts
+
+This dataset contains information about roundabout intersections across the world, (though we will focus on the United States). The data were accessed via TidyTuesday (Week of December 16, 2025) and are drawn from the roundabouts R package developed by Emil Hvitfeldt. The underlying database was compiled by Kittelson & Associates and includes detailed records on the location, design, configuration, and construction year of over 20,000 roundabouts globally.
+
+```{r}
+roundabouts_clean <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-12-16/roundabouts_clean.csv')
+
+```
+
+```{r, fig.width=11, fig.height=6}
+# rotary vs roundabout
+us_states <- map_data("state")
+
+# create summary with ifelse condition
+roundabouts_by_state <- roundabouts_clean |>
+  filter(nchar(state_region) <= 2) |>
+  filter(!type %in% c("Other", "Signalized Roundabout/Circle")) |>
+  drop_na(type) |>
+  group_by(state_region, type) |>
+  summarize(count = n(), .groups = "drop") |>
+  complete(state_region, type, fill = list(count = 0)) |>
+  mutate(
+    has_50_plus = case_when(
+      count == 0 ~ "0",
+      count >= 50 ~ "50+",
+      TRUE ~ "< 50"
+    ),
+    state_name = tolower(state.name[match(state_region, state.abb)])
+  )
+
+mycolors2 <- c(wes_palette("Darjeeling1")[2], "gray90", wes_palette("Darjeeling1")[4])
+
+# plot
+us_states |>
+  left_join(roundabouts_by_state, by = c("region" = "state_name")) |>
+  drop_na(type) |>
+  ggplot(aes(x = long, y = lat, group = group)) +
+  geom_polygon(aes(fill = has_50_plus)) +
+  scale_fill_manual(values = mycolors2) +
+  coord_map() +
+  theme_void() +
+  labs(title = "Number of Rotaries, Roundabouts, and Traffic Circles by State", fill = "Count") +
+  facet_wrap(~type) +
+  theme(plot.title = element_text(margin = margin(b = 20))) +  # b = bottom margin
+  theme(strip.text = element_text(margin = margin(b = 10)))   # space below facet titles
+```
+
+
+
+
+

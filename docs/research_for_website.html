@@ -146,12 +146,7 @@ window.Quarto = {
 <p><span class="math inline">\(I(x) = h_0 + \frac{h_1-h_0}{1 + e^{-a(x - t_1)}}\)</span></p>
 <p>A similar, but slightly more complicated, formula for the double-sigmoidal function is also used for parameter estimation in sicegar. In the original implementation of sicegar, the parameter <span class="math inline">\(h_0\)</span> is set to zero for both the sigmoidal and double-sigmoidal models.</p>
 <p><strong>Figure 1</strong> Visualization of the sigmoidal curve and related parameter values.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Images/sigmoidal_curve.png" class="img-fluid figure-img"></p>
-<figcaption>Sigmoidal curve.</figcaption>
-</figure>
-</div>
+<p><img src="Images/sigmoidal_curve.png" class="img-fluid"></p>
 <p><strong>sicegar</strong>’s parameter estimation allows users to extract key model parameters, including the onset time of RNA expression in specific genes <span class="citation" data-cites="caglar2018">[@caglar2018]</span>. Onset time is defined as the time when the half-maximal abundance of RNA is reached in the cell. For example, <span class="citation" data-cites="Adams">@Adams</span> uses <strong>sicegar</strong> to investigate the onset time of RNA expression from genes in E. coli undergoing stress. Accurate estimates of <span class="math inline">\(t_1\)</span> are crucial for understanding transriptional timing of genes. However, <span class="citation" data-cites="Adams">@Adams</span> observed limitations in <strong>sicegar</strong>’s fits, which motivated the package improvements proposed in our paper.</p>
 <p>We have substantially modified <strong>sicegar</strong> (our work is currently implemented on CRAN) to improve the parameter estimates for both sigmoidal and double-sigmoidal models. Our primary update to the <strong>sicegar</strong> package is the inclusion and estimation of an additional parameter, <span class="math inline">\(h_0\)</span>, the lower asymptote of both the sigmoidal and double-sigmoidal curves, which had previously been set equal to zero. Based on simulated data, the free estimation of <span class="math inline">\(h_0\)</span> provides both a better overall model fit (lower SSE) and more accurate parameter estimates than when <span class="math inline">\(h_0\)</span> is forced to be equal to zero.</p>
 </section>
@@ -171,12 +166,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="novel-contributions">Novel Contributions</h3>
 <p>Each function in <strong>sicegar</strong> was rewritten to include the parameter <span class="math inline">\(h_0\)</span> in addition to a some small technical changes to the functions. Our new version is outlined in the right-hand branch of <strong>Figure 1</strong>.</p>
 <p><strong>Figure 2</strong> Structure of the <code>fitAndCategorize</code> function.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Images/h0_alg.png" class="img-fluid figure-img"></p>
-<figcaption>Structure of the <code>fitAndCategorize</code> function.</figcaption>
-</figure>
-</div>
+<p><img src="Images/h0_alg.png" class="img-fluid"></p>
 </section>
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
