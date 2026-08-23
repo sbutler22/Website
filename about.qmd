@@ -7,6 +7,12 @@ format: html
 
 Hi!
 
-My name is Sam and I'm from Philadelphia. I graduated from Pomona College with a degree in math on the statistics track in the spring of 2026. I am now at Carnegie-Mellon University getting my Masters in Applied Data Science (MADS). I love working with data and especially enjoy making visualizations, and this site provides a neat little place to bring them together.
+My name is Sam and I'm from Philadelphia. I graduated from Pomona College in 2026 with a degree in math focusing on statistics. I am now at Carnegie Mellon University getting my Master of Science in Applied Data Science (MADS). I love working with data and especially enjoy making visualizations, and this site provides a neat little place to bring them together.
 
 Outside of statistics, I love to spend time outdoors, rock climb, hike, and bike. I was also the captain of my collegiate track and field team, and when I'm not doing stats, I am usually out for a run! 
+
+
+
+<iframe src="files/SButler_Official_Resume_copy.pdf#toolbar=1&navpanes=0" width="100%" height="800px" style="border: none;"></iframe>
+
+[Download PDF](files/SButler_Official_Resume_copy.pdf)
