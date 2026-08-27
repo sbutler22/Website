@@ -3,6 +3,8 @@ title: "Thesis"
 editor: source
 ---
 
+[← Back to home](index.html){.back-home}
+
 I worked on my thesis throughout my senior year under the advisement of Professor Jo Hardin.
 
 ![](Images/optimization_surface_copy.png){width=400px fig-align="center"}

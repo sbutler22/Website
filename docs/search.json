@@ -18,7 +18,7 @@
     "href": "Thesis.html",
     "title": "Thesis",
     "section": "",
-    "text": "I worked on my thesis throughout my senior year under the advisement of Professor Jo Hardin.\n\n\n\n\n\nThis thesis explores the advantages, disadvantages, and applications of different optimization routines in the context of different surfaces, namely the Levenberg-Marquardt Algorithm and the Whale Optimization Algorithm. We use simulation to evaluate and compare the two algorithms in their accuracy and convergence speed. We then propose a novel algorithm, combining the two, including modifications made to the WOA.\nDownload my thesis (PDF)"
+    "text": "← Back to home\nI worked on my thesis throughout my senior year under the advisement of Professor Jo Hardin.\n\n\n\n\n\nThis thesis explores the advantages, disadvantages, and applications of different optimization routines in the context of different surfaces, namely the Levenberg-Marquardt Algorithm and the Whale Optimization Algorithm. We use simulation to evaluate and compare the two algorithms in their accuracy and convergence speed. We then propose a novel algorithm, combining the two, including modifications made to the WOA.\nDownload my thesis (PDF)"
   },
   {
     "objectID": "154_class_proj.html",
