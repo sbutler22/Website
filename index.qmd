@@ -27,7 +27,7 @@ format:
     <img src="Images/hex-class_project.png" alt="Class Project" />
   </a>
   
-   <a class="hex hex-bottom-left" href="thesis.html" aria-label="Thesis">
+   <a class="hex hex-bottom-left" href="Thesis.html" aria-label="Thesis">
     <img src="hex-thesis.png" alt="Thesis" />
   </a>
   
