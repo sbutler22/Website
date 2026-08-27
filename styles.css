@@ -48,7 +48,7 @@ body{
 
 .hex img{
   width: 190px;
-  height: auto;
+  height: 220px;
   display: block;
   transition: transform 0.15s ease, filter 0.15s ease;
 }
@@ -68,7 +68,8 @@ body{
 .hex-top{    left: 36%; top: 18%; }
 .hex-left{   left: 22%; top: 52%; }
 .hex-right{  left: 78%; top: 52%; }
-.hex-bottom{ left: 64%; top: 86%; }   /* new */
+.hex-bottom{ left: 64%; top: 86%; }
+.hex-bottom-left{ left: 36.25%; top: 85.25%; } /* new */
 
 
 /* Mobile: stack */

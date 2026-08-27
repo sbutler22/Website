@@ -26,6 +26,11 @@ format:
   <a class="hex hex-bottom" href="154_class_proj.html" aria-label="Class Project">
     <img src="Images/hex-class_project.png" alt="Class Project" />
   </a>
+  
+   <a class="hex hex-bottom-left" href="thesis.html" aria-label="Thesis">
+    <img src="hex-thesis.png" alt="Thesis" />
+  </a>
+  
 </div>
 
 
