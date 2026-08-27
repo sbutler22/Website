@@ -160,6 +160,7 @@ plot(me)
 library(sicegar)
 library(tidyverse)
 # --- Simulate sigmoidal data ---
+# should set seed!!
 use_h0 <- FALSE
 noise_parameter <- 0.2
 reps <- 5
@@ -280,9 +281,26 @@ college <- sticker(
 
 plot(college)
 ```
+
+
+# thesis
+
+```{r}
+thesis <- sticker(
+  subplot  = "Images/whale_clipart.png",
+  package  = "Thesis",
+  p_size   = 36,
+  s_x      = 1,
+  s_y      = 0.75,
+  s_width  = 0.35,
+  h_fill   = "#F98400",   # background color
+  h_color  = "#5BBCD6",   # outline color
+  filename = "hex-thesis.png",
+  dpi      = 600
+)
+
+plot(thesis)
 ```
-
-
 
 
 
