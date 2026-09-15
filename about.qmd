@@ -11,8 +11,12 @@ My name is Sam and I'm from Philadelphia. I graduated from Pomona College in 202
 
 Outside of statistics, I love to spend time outdoors, rock climb, hike, and bike. I was also the captain of my collegiate track and field team, and when I'm not doing stats, I am usually out for a run! 
 
+[LinkedIn](https://www.linkedin.com/in/sam-butler-292b4128b/)
+
+[GitHub](https://github.com/sbutler22)
+
 
 
 <iframe src="files/SButler_Official_Resume_copy.pdf#toolbar=1&navpanes=0" width="100%" height="800px" style="border: none;"></iframe>
 
-[Download PDF](files/SButler_Official_Resume_copy.pdf)
+[Download PDF](files/SButler_Resume_Website_copy.pdf)

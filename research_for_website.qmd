@@ -7,6 +7,10 @@ format: html
 
 This research was done in collaboration with Phineus Choi, Thomas Matheis, and Mira Terdiman under the advisement of Jo Hardin, in the summer and fall of 2025. The paper below has been submitted to the Journal of Open Source Software (JOSS).
 
+
+[GitHub Repository](https://github.com/hardin47/sicegar)
+
+
 # Summary
 
 The R package **sicegar** aims to quantify time-intensity data by using sigmoidal and double-sigmoidal curves. The method was originally developed in the context of single-cell viral growth analysis (for details, see @caglar2018), and the package name stands for "SIngle CEll Growth Analysis in R". In addition to categorizing the best model fit, **sicegar** returns parameter estimates for each of the model fits, providing important information to researchers.
