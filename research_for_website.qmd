@@ -8,7 +8,7 @@ format: html
 This research was done in collaboration with Phineus Choi, Thomas Matheis, and Mira Terdiman under the advisement of Jo Hardin, in the summer and fall of 2025. The paper below has been submitted to the Journal of Open Source Software (JOSS).
 
 
-[GitHub Repository](https://github.com/hardin47/sicegar)
+<a href="https://github.com/hardin47/sicegar" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
 
 
 # Summary
